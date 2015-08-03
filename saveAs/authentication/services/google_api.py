@@ -4,6 +4,7 @@ from oauth2client.client import FlowExchangeError
 from apiclient import discovery
 from apiclient import errors
 import httplib2
+from apiclient.discovery import build
 # ...
 
 
@@ -30,6 +31,9 @@ SCOPES = [
   'https://www.googleapis.com/auth/drive.file',
   'email',
   'profile',
+    'https://www.googleapis.com/auth/drive.file',
+    'email',
+    'profile',
     # Add other requested scopes.
 ]
 class GetCredentialsException(Exception):
@@ -123,7 +127,7 @@ def get_user_info(credentials):
   Returns:
     User information as a dict.
   """
-  user_info_service = discovery.build(
+  user_info_service = build(
       serviceName='oauth2', version='v2',
       http=credentials.authorize(httplib2.Http()))
   user_info = None
