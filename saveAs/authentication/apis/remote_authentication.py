@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from saveAs.authentication.services import google_api
+import requests
 
 def google_authentication(request):
     print "trying to autheticate Google Drive"
     url = google_api.get_authorization_url('vibhor500@gmail.com', 'testing')
     print url
-
+    response = requests.get(url)
+    print response.text
     return HttpResponse("Success in authentication to Google Drive.")
 
 def abc(request):
